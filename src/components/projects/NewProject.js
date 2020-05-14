@@ -14,12 +14,16 @@ const NewProject = () => {
     });
   };
 
+  const onSubmitProject = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <Fragment>
       <button type="button" className="btn btn-block btn-primario">
         Nuevo Proyecto
       </button>
-      <form className="formulario-nuevo-proyecto">
+      <form className="formulario-nuevo-proyecto" onSubmit={onSubmitProject}>
         <input
           type="text"
           className="input-text"
