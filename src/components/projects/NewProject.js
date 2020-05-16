@@ -1,15 +1,15 @@
-import React, { Fragment, useState, useContext } from "react";
+import React, { Fragment } from "react";
 import ProjectContext from "../../context/projects/ProjectContext";
 
 const NewProject = () => {
-  const projectContext = useContext(ProjectContext);
-  const { form, showForm } = projectContext;
+  const projectContext = React.useContext(ProjectContext);
+  const { form, showForm, addProject } = projectContext;
 
-  const [project, setProject] = useState({
-    nombre: "",
+  const [project, setProject] = React.useState({
+    nameProject: "",
   });
 
-  const { nombre } = project;
+  const { nameProject } = project;
 
   const onChangeProject = (e) => {
     setProject({
@@ -20,6 +20,14 @@ const NewProject = () => {
 
   const onSubmitProject = (e) => {
     e.preventDefault();
+
+    if (nameProject === "") return;
+
+    addProject(project);
+
+    setProject({
+      projectName: "",
+    });
   };
 
   return (
@@ -33,13 +41,13 @@ const NewProject = () => {
       </button>
 
       {form ? (
-        <form className="formulario-nuevo-proyecto" onSubmit={() => showForm()}>
+        <form className="formulario-nuevo-proyecto" onSubmit={onSubmitProject}>
           <input
             type="text"
             className="input-text"
             placeholder="Nombre Proyecto"
-            name="nombre"
-            value={nombre}
+            name="nameProject"
+            value={nameProject}
             onChange={onChangeProject}
           />
           <input

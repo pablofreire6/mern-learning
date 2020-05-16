@@ -1,13 +1,13 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import Project from "./Project";
 
 import ProjectContext from "../../context/projects/ProjectContext";
 
 const ListProjects = () => {
-  const projectContext = useContext(ProjectContext);
+  const projectContext = React.useContext(ProjectContext);
   const { projects, getProjects } = projectContext;
 
-  useEffect(() => {
+  React.useEffect(() => {
     getProjects();
   }, []);
 
