@@ -3,7 +3,7 @@ import ProjectContext from "../../context/projects/ProjectContext";
 
 const NewProject = () => {
   const projectContext = React.useContext(ProjectContext);
-  const { form, showForm, addProject } = projectContext;
+  const { form, errorForm, showForm, addProject, showError } = projectContext;
 
   const [project, setProject] = React.useState({
     nameProject: "",
@@ -21,7 +21,10 @@ const NewProject = () => {
   const onSubmitProject = (e) => {
     e.preventDefault();
 
-    if (nameProject === "") return;
+    if (nameProject === "") {
+      showError();
+      return;
+    }
 
     addProject(project);
 
@@ -56,6 +59,10 @@ const NewProject = () => {
             value="Agregar Proyecto"
           />
         </form>
+      ) : null}
+
+      {errorForm ? (
+        <p className="mensaje error">El nombre del projecto es obligatorio</p>
       ) : null}
     </Fragment>
   );
