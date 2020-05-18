@@ -4,18 +4,17 @@ import ProjectContext from "../../context/projects/ProjectContext";
 
 const ListTasks = () => {
   const projectContext = React.useContext(ProjectContext);
-  const { project } = projectContext;
+  const { project, deleteProject } = projectContext;
 
   if (!project) return <h2>Selecciona un proyecto</h2>;
 
   const [currentProject] = project;
 
-  const tasks = [
-    { name: "Elegir Plataforma", state: true },
-    { name: "Elegir Colores", state: false },
-    { name: "Elegir Formas de Pago", state: true },
-    { name: "Elegir Hosting", state: false },
-  ];
+  const tasks = [];
+
+  const handleDeleteProject = () => {
+    deleteProject(currentProject.id);
+  };
   return (
     <Fragment>
       <h2>Proyecto: {currentProject.nameProject}</h2>
@@ -30,7 +29,11 @@ const ListTasks = () => {
         )}
       </ul>
 
-      <button type="button" className="btn btn-eliminar">
+      <button
+        type="button"
+        className="btn btn-eliminar"
+        onClick={handleDeleteProject}
+      >
         Eliminar Proyecto &times;
       </button>
     </Fragment>
