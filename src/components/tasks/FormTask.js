@@ -9,9 +9,13 @@ const FormTask = () => {
 
   const [currentProject] = project;
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="formulario">
-      <form>
+      <form onSubmit={onSubmit}>
         <div className="contenedor-input">
           <input
             type="text"

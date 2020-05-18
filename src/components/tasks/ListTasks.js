@@ -1,16 +1,18 @@
 import React, { Fragment } from "react";
 import Task from "./Task";
 import ProjectContext from "../../context/projects/ProjectContext";
+import TaskContext from "../../context/tasks/TaskContext";
 
 const ListTasks = () => {
   const projectContext = React.useContext(ProjectContext);
+  const taskContext = React.useContext(TaskContext);
+
   const { project, deleteProject } = projectContext;
+  const { tasksProject } = taskContext;
 
   if (!project) return <h2>Selecciona un proyecto</h2>;
 
   const [currentProject] = project;
-
-  const tasks = [];
 
   const handleDeleteProject = () => {
     deleteProject(currentProject.id);
@@ -20,12 +22,12 @@ const ListTasks = () => {
       <h2>Proyecto: {currentProject.nameProject}</h2>
 
       <ul className="listado-tareas">
-        {tasks.length === 0 ? (
+        {tasksProject.length === 0 ? (
           <li className="tarea">
             <p>No hay tareas</p>
           </li>
         ) : (
-          tasks.map((task, index) => <Task key={index} task={task} />)
+          tasksProject.map((task, index) => <Task key={index} task={task} />)
         )}
       </ul>
 
